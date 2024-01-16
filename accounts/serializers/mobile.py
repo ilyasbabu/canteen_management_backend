@@ -15,3 +15,10 @@ class UserLoginResultSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     name = serializers.CharField()
     type = serializers.CharField()
+
+
+class UserPasswordChangeSerializer(serializers.Serializer):
+    """Serializer to get the inputs from change password"""
+
+    new_password = serializers.CharField(required=True, allow_blank=False)
+    confirm_password = serializers.CharField(required=True, allow_blank=False)

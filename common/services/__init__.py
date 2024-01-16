@@ -1,1 +1,1 @@
-from .mobile import serialize_mobile_api
+from .mobile import serialize_mobile_api, handle_error

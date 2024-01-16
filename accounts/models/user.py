@@ -18,6 +18,7 @@ class User(AbstractUser):
     last_name = None
 
     name = models.TextField()
+    mobile = models.CharField(max_length=10)
     type = models.CharField(
         max_length=10, choices=UserType.choices, default=UserType.ADMIN
     )
