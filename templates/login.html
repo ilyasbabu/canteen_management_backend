@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen">
+    <div class="flex h-screen justify-center w-full items-center">
+        <div class="flex flex-col w-full max-w-md p-12 space-y-4 text-center bg-gray-50 text-gray-800">
+            <h1 class="text-3xl font-semibold">Canteen Management</h1>
+            <h1 class="text-xl">Login in to your account</h1>
+            <form method="POST" action="{% url 'web:login' %}" class="space-y-4">
+                {% csrf_token %}
+                <div class="flex flex-col">
+                    <input type="text" placeholder="Username" name="username" value="{{ username }}"
+                        class=" border border-gray-400 bg-gray-50 text-gray-800 focus:ri focus:border-sky-600 focus:ri p-1">
+                    <input type="password" placeholder="Password" name="password" value="{{ password }}"
+                        class="mt-1  border border-gray-400 bg-gray-50 text-gray-800 focus:ri focus:border-sky-600 focus:ri p-1">
+                </div>
+                <input type="hidden" value="{{ next_url }}" name="next_url">
+                {% if error %}
+                <div class="text-red-500 text-xs">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <button type="submit"
+                    class="px-8 py-3 space-x-2 font-semibold rounded bg-sky-600 text-gray-50 hover:bg-sky-700">Log
+                    in</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

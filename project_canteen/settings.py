@@ -23,6 +23,8 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "common.apps.CommonConfig",
     "accounts.apps.AccountsConfig",
+    "web.apps.WebConfig",
+    "canteen_manager.apps.CanteenManagerConfig"
 ]
 
 INSTALLED_APPS = DJANGO_APPS  + LOCAL_APPS
@@ -44,7 +46,7 @@ ROOT_URLCONF = 'project_canteen.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

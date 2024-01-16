@@ -16,6 +16,7 @@ class User(AbstractUser):
 
     first_name = None
     last_name = None
+    email = None
 
     name = models.TextField()
     mobile = models.CharField(max_length=10)
