@@ -23,7 +23,6 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "common.apps.CommonConfig",
     "accounts.apps.AccountsConfig",
-    "web.apps.WebConfig",
     "canteen_manager.apps.CanteenManagerConfig",
     "teacher.apps.TeacherConfig",
     "student.apps.StudentConfig",

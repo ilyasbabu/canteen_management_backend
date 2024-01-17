@@ -1,21 +1,24 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from accounts.models import UserType
 from accounts.services.web import web_login
+
 
 class HomeView(View):
     template_name = "home.html"
 
     def get(self, request):
         if request.user.is_anonymous:
-            return redirect("web:login")
+            return redirect("accounts:login")
         else:
             if request.user.type == UserType.ADMIN:
                 return render(request, self.template_name)
             else:
                 logout(request)
-                return redirect("web:login")
+                return redirect("accounts:login")
 
 
 class LoginView(View):
@@ -39,8 +42,14 @@ class LoginView(View):
                 },
             )
         else:
-            return redirect("web:home")
+            return redirect("accounts:home")
 
     def post(self, request):
         response = web_login(request, self.template_name)
         return response
+
+
+class LogoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        logout(request)
+        return redirect("accounts:login")
