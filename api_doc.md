@@ -84,13 +84,10 @@ Sample Error Responses -
 ---
 ## 3. Food List for Canteen Manager
 
-**POST** - `api/mobile/canteen/food/list/`
+**GET** - `api/mobile/canteen/food/list/`
 
 (authentication Required)
-```
-*new_password
-*confirm_password
-```
+
 Sample Success Response - 
 
 ```
