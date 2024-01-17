@@ -14,6 +14,7 @@ from django.contrib.auth import get_user_model
 from accounts.models import UserType
 from canteen_manager.models import CanteenManager, FoodCategory, Food
 from teacher.models import Teacher
+from student.models import Student, Department
 
 User = get_user_model()
 
@@ -65,7 +66,7 @@ if __name__ == "__main__":
             + "\n password - "
             + canteen_manager_password
         )
-        print("Canteen Manager User Created Sucessfully!!!\n")
+        print("Canteen Manager Created Sucessfully!!!\n")
 
         # SUPERVISING TEACHERS
         teachers = [
@@ -96,12 +97,14 @@ if __name__ == "__main__":
                 user=teacher_user, created_by=admin_user, modified_by=admin_user
             )
             print(
-                "Suoervising Teacher credentials: \n username - "
+                "Supervising Teacher credentials: \n username - "
                 + teacher["username"]
                 + "\n password - "
                 + teacher["password"]
             )
-            print("Suoervising Teacher User Created Sucessfully!!!\n")
+            print(
+                "Supervising Teacher- " + teacher["name"] + " Created Sucessfully!!!\n"
+            )
 
         # FOOD
         food_categories = [
@@ -275,3 +278,42 @@ if __name__ == "__main__":
             + ", ".join(food["name"] for food in foods)
             + " Created Sucessfully!!!\n"
         )
+
+        # STUDENT
+        students = [
+            {
+                "name": "Jhon",
+                "password": "1234",
+                "mobile": "9898989898",
+                "department": Department.COMPUTER_SCIENCE,
+            },
+            {
+                "name": "Jane",
+                "password": "1234",
+                "mobile": "8787878787",
+                "department": Department.HOTEL_MANAGEMENT,
+            },
+        ]
+        for student in students:
+            student_user = User(
+                username=student["mobile"],
+                mobile=student["mobile"],
+                name=student["name"],
+                type=UserType.STUDENT,
+            )
+            student_user.set_password(student["password"])
+            student_user.full_clean()
+            student_user.save()
+            Student.objects.create(
+                user=student_user,
+                department=student["department"],
+                created_by=admin_user,
+                modified_by=admin_user,
+            )
+            print(
+                "Student credentials: \n username - "
+                + student["mobile"]
+                + "\n password - "
+                + student["password"]
+            )
+            print("Student- " + student["name"] + " Created Sucessfully!!!\n")
