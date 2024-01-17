@@ -9,6 +9,7 @@ from teacher.models import Teacher
 class Food(TimeStamp):
     name = models.TextField()
     quantity = models.IntegerField()
+    price = models.TextField()
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
     approved_by = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
