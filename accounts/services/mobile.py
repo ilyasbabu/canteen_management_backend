@@ -6,7 +6,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Q
-from accounts.models import UserAuthToken
+from accounts.models import UserAuthToken, UserType
 
 User = get_user_model()
 
@@ -28,6 +28,8 @@ def user_login(username: str, password: str):
 def check_user(username: str, password: str):
     try:
         user = User.objects.get(username=username)
+        if user.type == UserType.ADMIN:
+            raise ValidationError("Admin cannot login via mobile app")
         if user.is_disabled:
             raise ValidationError(
                 "Account has been deactivated.Please contact admin for any resolution"
