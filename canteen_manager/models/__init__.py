@@ -1,1 +1,3 @@
-from .canteenmanager import CanteenManaer
+from .canteenmanager import CanteenManager
+from .food import Food
+from .foodcategory import FoodCategory
