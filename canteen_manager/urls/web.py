@@ -8,4 +8,9 @@ urlpatterns = [
         web.CanteenManagerManageView.as_view(),
         name="canteen_manager",
     ),
+    path(
+        "food-list/",
+        web.FoodListView.as_view(),
+        name="food_list",
+    ),
 ]

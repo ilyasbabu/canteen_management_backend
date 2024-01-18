@@ -1,4 +1,4 @@
-from canteen_manager.models import CanteenManager
+from canteen_manager.models import CanteenManager, Food
 
 
 def get_canteen_manager_data():
@@ -17,3 +17,9 @@ def upddate_canteen_manager(request):
     canteen_manager_user.name = request.POST.get("name")
     canteen_manager_user.mobile = request.POST.get("mobile")
     canteen_manager_user.save()
+
+def get_food_list():
+    food_list = Food.objects.filter(is_active=True)
+    return {
+        "food_list": food_list
+    }

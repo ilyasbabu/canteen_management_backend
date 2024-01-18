@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from canteen_manager.models import CanteenManager
 from canteen_manager.services.canteen_manager import (
     upddate_canteen_manager,
     get_canteen_manager_data,
+    get_food_list,
 )
 
 
@@ -19,3 +19,11 @@ class CanteenManagerManageView(LoginRequiredMixin, View):
     def post(self, request):
         upddate_canteen_manager(request)
         return redirect("accounts:home")
+
+
+class FoodListView(LoginRequiredMixin, View):
+    template_name = "food_list.html"
+
+    def get(self, request):
+        data = get_food_list()
+        return render(request, self.template_name, data)
