@@ -11,6 +11,9 @@
 7. [Food Details for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#7-food-details-for-canteen-manager)
 8. [Food Update for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#8-food-update-for-canteen-manager)
 9. [Food Delete for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#9-food-delete-for-canteen-manager)
+10. [Food List for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#10-food-list-for-teacher)
+11. [Food Detail for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-detail-for-teacher)
+12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-approve)
 
 ### Authentication
 ```
@@ -242,6 +245,7 @@ Sample Success Response -
 ```
 
 ---
+
 ## 6. Food Create
 
 **POST** - `api/mobile/canteen/food/create/`
@@ -374,3 +378,132 @@ Sample Error Response -
 ```
 
 ---
+
+## 10. Food List for Teacher
+
+**GET** - `api/mobile/teacher/food/list/`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 5,
+      "name": "Chicken 65",
+      "price": "50",
+      "quantity": 100,
+      "is_approved": false
+    },
+    {
+      "id": 4,
+      "name": "Chicken Biryani",
+      "price": "50",
+      "quantity": 100,
+      "is_approved": true
+    },
+    {
+      "id": 3,
+      "name": "Chicken Tikka",
+      "price": "50",
+      "quantity": 100,
+      "is_approved": false
+    },
+    {
+      "id": 2,
+      "name": "Masala Dosa",
+      "price": "50",
+      "quantity": 100,
+      "is_approved": false
+    },
+    {
+      "id": 1,
+      "name": "Paneer Tikka",
+      "price": "50",
+      "quantity": 100,
+      "is_approved": true
+    }
+  ]
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a TEACHER to access this API"
+  ]
+}
+```
+---
+
+## 11. Food Detail for Teacher
+
+**GET** - `api/mobile/teacher/food/detail/[food_id]`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": {
+    "id": 2,
+    "name": "Masala Dosa",
+    "price": "50",
+    "quantity": 100,
+    "is_approved": false,
+    "category_id": 1,
+    "category_name": "Vegetarian"
+  }
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a TEACHER to access this API"
+  ]
+}
+```
+---
+
+## 12. Food Approve
+
+**POST** - `api/mobile/teacher/food/approve/[food_id]`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Food Approved Successfully",
+  "data": {}
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Food already approved"
+  ]
+}
+```
+---
+

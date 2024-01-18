@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("accounts.urls", namespace="accounts")),
     path("", include("canteen_manager.urls", namespace="canteen_manager")),
+    path("", include("teacher.urls", namespace="teacher")),
 ]

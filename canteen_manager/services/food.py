@@ -1,11 +1,12 @@
 from canteen_manager.models import Food, FoodCategory
+from teacher.models import Teacher
 from accounts.models import UserType
 from django.core.exceptions import ValidationError
 from django.db.models import F
-from common.constants import NOT_CANTEEN_MANAGER_MSG
+from common.constants import NOT_CANTEEN_MANAGER_MSG, NOT_TEACHER_MSG
 
 
-def get_food_list(user):
+def get_food_list_for_manager(user):
     if user.type != UserType.MANAGER:
         raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
     data = []
@@ -46,7 +47,7 @@ def create_food(user, name, quantity, price, category_id):
     return food
 
 
-def get_food_detail(user, food_id):
+def get_food_detail_for_manager(user, food_id):
     if user.type != UserType.MANAGER:
         raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
     try:
@@ -100,4 +101,58 @@ def delete_food(user, food_id):
     except:
         raise ValidationError("Invalid Food")
     food.is_active = False
+    food.save()
+
+
+def get_food_list_for_teacher(user):
+    if user.type != UserType.TEACHER:
+        raise ValidationError(NOT_TEACHER_MSG)
+    data = []
+    foods = Food.objects.filter(is_active=True).order_by("-created_date")
+    for food in foods:
+        food_dct = {}
+        food_dct["id"] = food.id
+        food_dct["name"] = food.name
+        food_dct["price"] = food.price
+        food_dct["quantity"] = food.quantity
+        food_dct["is_approved"] = food.is_approved
+        data.append(food_dct)
+    return data
+
+
+def get_food_detail_for_teacher(user, food_id):
+    if user.type != UserType.TEACHER:
+        raise ValidationError(NOT_TEACHER_MSG)
+    try:
+        return (
+            Food.objects.annotate(
+                category_name=F("category__name"),
+            )
+            .values(
+                "id",
+                "name",
+                "price",
+                "quantity",
+                "is_approved",
+                "category_name",
+                "category_id",
+            )
+            .get(id=food_id, is_active=True)
+        )
+    except:
+        raise ValidationError("Invalid Food")
+
+
+def approve_food(user, food_id):
+    if user.type != UserType.TEACHER:
+        raise ValidationError(NOT_TEACHER_MSG)
+    try:
+        food = Food.objects.get(id=food_id, is_active=True)
+    except:
+        raise ValidationError("Invalid Food")
+    if food.is_approved:
+        raise ValidationError("Food already approved")
+    teacher = Teacher.objects.get(user=user)
+    food.is_approved = True
+    food.approved_by = teacher
     food.save()

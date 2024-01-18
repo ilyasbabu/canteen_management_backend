@@ -8,10 +8,10 @@ from accounts.services.authentication import CustomTokenAuthentication
 from common.mixins import ExceptionHandlerMixin
 from common.services import serialize_mobile_api, handle_error
 from canteen_manager.services.food import (
-    get_food_list,
+    get_food_list_for_manager,
     create_food,
     get_food_category,
-    get_food_detail,
+    get_food_detail_for_manager,
     update_food,
     delete_food,
 )
@@ -28,7 +28,7 @@ class FoodListAPI(ExceptionHandlerMixin, APIView):
     def get(self, request):
         try:
             user = request.user
-            data = get_food_list(user)
+            data = get_food_list_for_manager(user)
             res = serialize_mobile_api(True, data, "SUCCESS")
             return Response(status=status.HTTP_200_OK, data=res)
         except Exception as e:
@@ -94,7 +94,7 @@ class FoodDetailAPI(ExceptionHandlerMixin, APIView):
     def get(self, request, id):
         try:
             user = request.user
-            data = get_food_detail(user, id)
+            data = get_food_detail_for_manager(user, id)
             res = serialize_mobile_api(True, data, "SUCCESS")
             return Response(status=status.HTTP_200_OK, data=res)
         except Exception as e:
