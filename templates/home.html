@@ -16,7 +16,8 @@
     <nav aria-label="breadcrumb" class="w-full p-4 bg-gray-100 text-gray-800">
         <ol class="flex h-8 space-x-2 text-gray-800">
             <li class="flex items-center">
-                <a rel="noopener noreferrer" href="{% url 'accounts:home' %}" title="Back to homepage" class="flex items-center hover:underline">Home</a>
+                <a rel="noopener noreferrer" href="{% url 'accounts:home' %}" title="Back to homepage"
+                    class="flex items-center hover:underline">Home</a>
             </li>
         </ol>
     </nav>
@@ -24,7 +25,8 @@
     <ol class="p-2">
         <li>• <a href="{% url 'canteen_manager:canteen_manager' %}"
                 class="hover:underline text-blue-700 hover:text-blue-800">Manage Canteen Manager</a></li>
-        <li>• <a href="" class="hover:underline text-blue-700 hover:text-blue-800">Manage Supervising Teachers</a></li>
+        <li>• <a href="{% url 'teacher:list' %}"
+                class="hover:underline text-blue-700 hover:text-blue-800">Manage Supervising Teachers</a></li>
         <li>• <a href="" class="hover:underline text-blue-700 hover:text-blue-800">Manage Students</a></li>
         <li>• <a href="" class="hover:underline text-blue-700 hover:text-blue-800">Manage Food</a></li>
     </ol>

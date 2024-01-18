@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen p-2">
+    <div class="w-full flex justify-between">
+        <h1 class="text-2xl p-2 font-semibold">Canteen Management</h1>
+        <a href="{% url 'accounts:logout' %}"
+            class="text-lg p-2 hover:underline text-blue-700 hover:text-blue-800">Logout</a>
+    </div>
+    <nav aria-label="breadcrumb" class="w-full p-4 bg-gray-100 text-gray-800">
+        <ol class="flex h-8 space-x-2 text-gray-800">
+            <li class="flex items-center">
+                <a rel="noopener noreferrer" href="{% url 'accounts:home' %}" title="Back to homepage"
+                    class="flex items-center hover:underline">Home</a>
+            </li>
+            <li class="flex items-center space-x-1">
+                <span class="text-gray-600">/</span>
+                <a rel="noopener noreferrer" href="#" class="flex items-center px-1 capitalize hover:underline">Manage
+                    Supervising Teacher</a>
+            </li>
+            <li class="flex items-center space-x-1">
+                <span class="text-gray-600">/</span>
+                <a rel="noopener noreferrer" href="#" class="flex items-center px-1 capitalize hover:underline">Teacher Detail</a>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="bg-gray-100 transition-colors duration-300">
+        <div class="container mx-auto p-4">
+            <div class="bg-white shadow rounded-lg p-6">
+                <div class="flex justify-between">
+                    <div>
+                        <h1 class="text-xl font-semibold mb-4 text-gray-900">Supervising Teacher</h1>
+                        <p class="text-gray-600 mb-6">Edit Details of Supervising Teacher.</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'teacher:delete' id %}">Delete</a>
+                    </div>
+                </div>
+                <form method="post" action="{% url 'teacher:detail' id %}">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="name">Username</label>
+                        <input type="text" placeholder="Name" class="border p-2 rounded w-full" name="username" required
+                            value="{{username}}">
+                    </div>
+                    <div class="mb-4">
+                        <label for="name">Name</label>
+                        <input type="text" placeholder="Name" class="border p-2 rounded w-full" name="name" required
+                            value="{{name}}">
+                    </div>
+                    <div class="mb-4">
+                        <label for="mobile_number">Mobile Number</label>
+                        <input type="text" placeholder="Mobile Number" class="border p-2 rounded w-full" name="mobile" required
+                            value="{{mobile}}">
+                    </div>
+                    <button type="submit"
+                        class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none transition-colors">
+                        Save
+                    </button>
+                    <a href="{% url 'teacher:list' %}" class="px-4">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

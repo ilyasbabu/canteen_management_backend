@@ -4,5 +4,5 @@ app_name = "teacher"
 
 urlpatterns = [
     path("api/mobile/teacher/", include("teacher.urls.mobile")),
-    # path("", include("teacher.urls.web")),
+    path("teacher/", include("teacher.urls.web")),
 ]

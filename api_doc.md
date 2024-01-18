@@ -13,7 +13,7 @@
 9. [Food Delete for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#9-food-delete-for-canteen-manager)
 10. [Food List for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#10-food-list-for-teacher)
 11. [Food Detail for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-detail-for-teacher)
-12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-approve)
+12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#12-food-approve)
 
 ### Authentication
 ```
