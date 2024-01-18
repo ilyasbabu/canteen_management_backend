@@ -1,10 +1,28 @@
 # API Documentation
 
+### APIs
+
+1. [Login](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#1-login)
+2. [Logout](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#2-logout)
+3. [Change Password](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#3-change-password)
+4. [Food List for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#3-food-list-for-canteen-manager)
+
 ### Authentication
 ```
 Header -
 
 Authorization: Token <token>
+```
+
+Authentication Error Messages
+```
+{
+  "detail": "Authentication credentials were not provided."
+}
+
+[
+  "Invalid token."
+]
 ```
 
 ## 1. Login
@@ -28,7 +46,7 @@ Sample Success Response -
   }
 }
 ```
-Sample Error Responses - 
+Sample Error Response - 
 
 ```
 {
@@ -50,7 +68,32 @@ Sample Error Responses -
 
 ---
 
-## 2. Change Password
+## 2. Logout
+
+**POST** - `api/mobile/logout/`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Logged Out Succesfully",
+  "data": {}
+}
+```
+Sample Error Response - 
+
+```
+[
+  "Invalid token."
+]
+```
+
+---
+
+## 3. Change Password
 
 **POST** - `api/mobile/change-password/`
 
@@ -68,7 +111,7 @@ Sample Success Response -
   "data": {}
 }
 ```
-Sample Error Responses - 
+Sample Error Response - 
 
 ```
 {
@@ -82,7 +125,7 @@ Sample Error Responses -
 ```
 
 ---
-## 3. Food List for Canteen Manager
+## 4. Food List for Canteen Manager
 
 **GET** - `api/mobile/canteen/food/list/`
 
@@ -143,7 +186,7 @@ Sample Success Response -
   ]
 }
 ```
-Sample Error Responses - 
+Sample Error Response - 
 
 ```
 {

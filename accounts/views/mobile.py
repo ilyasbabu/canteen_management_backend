@@ -5,13 +5,17 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.core.exceptions import ValidationError
 from accounts.services.authentication import CustomTokenAuthentication
-from accounts.services.mobile import user_login
-from accounts.serializers.mobile import UserLoginSerializer, UserLoginResultSerializer, UserPasswordChangeSerializer
+from accounts.services.mobile import user_login, user_logout
+from accounts.serializers.mobile import (
+    UserLoginSerializer,
+    UserLoginResultSerializer,
+    UserPasswordChangeSerializer,
+)
 from common.mixins import ExceptionHandlerMixin
 from common.services import serialize_mobile_api, handle_error
 
 
-class LoginAPI(ExceptionHandlerMixin,APIView):
+class LoginAPI(ExceptionHandlerMixin, APIView):
     """API for user login from mobile app"""
 
     authentication_classes = [CustomTokenAuthentication]
@@ -39,7 +43,26 @@ class LoginAPI(ExceptionHandlerMixin,APIView):
             return Response(status=status.HTTP_404_NOT_FOUND, data=res)
 
 
-class ChangePasswordAPI(ExceptionHandlerMixin,APIView):
+class LogoutAPI(ExceptionHandlerMixin, APIView):
+    """API for user logout from mobile app"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            user = request.user
+            user_logout(user)
+            res = serialize_mobile_api(True, msg="Logged Out Succesfully")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+
+
+class ChangePasswordAPI(ExceptionHandlerMixin, APIView):
     """API for user password change from mobile app"""
 
     authentication_classes = [CustomTokenAuthentication]
@@ -66,10 +89,9 @@ class ChangePasswordAPI(ExceptionHandlerMixin,APIView):
                 return Response(status=status.HTTP_404_NOT_FOUND, data=res)
             user.set_password(password)
             user.save()
-            res = serialize_mobile_api(True, msg = "Password changed successfully")
+            res = serialize_mobile_api(True, msg="Password changed successfully")
             return Response(status=status.HTTP_201_CREATED, data=res)
         except Exception as e:
             msg = handle_error(e)
             res = serialize_mobile_api(False, msg, "ERROR")
             return Response(status=status.HTTP_404_NOT_FOUND, data=res)
-

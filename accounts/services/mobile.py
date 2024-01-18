@@ -62,3 +62,7 @@ def login_info_save(user, auth_token):
             user=user, key=auth_token, created_by=user, modified_by=user
         )
     user_auth_token.save()
+
+
+def user_logout(user) -> None:
+    UserAuthToken.objects.filter(user=user).update(is_expired=True)
