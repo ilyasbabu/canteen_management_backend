@@ -5,7 +5,9 @@
 1. [Login](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#1-login)
 2. [Logout](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#2-logout)
 3. [Change Password](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#3-change-password)
-4. [Food List for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#3-food-list-for-canteen-manager)
+4. [Food List for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-list-for-canteen-manager)
+5. [Food Category Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-category-dropdown)
+6. [Food Create](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-create)
 
 ### Authentication
 ```
@@ -125,6 +127,7 @@ Sample Error Response -
 ```
 
 ---
+
 ## 4. Food List for Canteen Manager
 
 **GET** - `api/mobile/canteen/food/list/`
@@ -194,6 +197,76 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "You Should be a CANTEEN MANAGER to access this API"
+  ]
+}
+```
+---
+
+## 5. Food Category Dropdown
+
+**GET** - `api/mobile/canteen/food/category/dropdown/`
+
+(authentication Required)
+
+Sample Success Response - 
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 1,
+      "name": "Vegetarian"
+    },
+    {
+      "id": 2,
+      "name": "Non-Vegetarian"
+    },
+    {
+      "id": 3,
+      "name": "Dessert"
+    },
+    {
+      "id": 4,
+      "name": "Snacks"
+    },
+    {
+      "id": 5,
+      "name": "Drinks"
+    }
+  ]
+}
+```
+
+---
+## 6. Food Create
+
+**POST** - `api/mobile/canteen/food/create/`
+
+(authentication Required)
+```
+*name
+*quantity
+*price
+*category_id
+```
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Food Created Successfully",
+  "data": {}
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Invalid Food Category"
   ]
 }
 ```

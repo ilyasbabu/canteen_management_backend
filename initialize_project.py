@@ -132,6 +132,7 @@ if __name__ == "__main__":
             {
                 "name": "Paneer Tikka",
                 "quantity": 100,
+                "price": "50",
                 "category": "Vegetarian",
                 "is_approved": True,
                 "is_todays_special": True,
@@ -139,6 +140,7 @@ if __name__ == "__main__":
             {
                 "name": "Masala Dosa",
                 "quantity": 100,
+                "price": "50",
                 "category": "Vegetarian",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -146,6 +148,7 @@ if __name__ == "__main__":
             {
                 "name": "Chicken Tikka",
                 "quantity": 100,
+                "price": "50",
                 "category": "Vegetarian",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -153,6 +156,7 @@ if __name__ == "__main__":
             {
                 "name": "Chicken Biryani",
                 "quantity": 100,
+                "price": "50",
                 "category": "Non-Vegetarian",
                 "is_approved": True,
                 "is_todays_special": False,
@@ -160,6 +164,7 @@ if __name__ == "__main__":
             {
                 "name": "Chicken 65",
                 "quantity": 100,
+                "price": "50",
                 "category": "Non-Vegetarian",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -167,6 +172,7 @@ if __name__ == "__main__":
             {
                 "name": "Chocolate Cake",
                 "quantity": 100,
+                "price": "50",
                 "category": "Dessert",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -174,6 +180,7 @@ if __name__ == "__main__":
             {
                 "name": "Chocolate Brownie",
                 "quantity": 100,
+                "price": "50",
                 "category": "Dessert",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -181,6 +188,7 @@ if __name__ == "__main__":
             {
                 "name": "Chicken Roll",
                 "quantity": 100,
+                "price": "50",
                 "category": "Snacks",
                 "is_approved": True,
                 "is_todays_special": False,
@@ -188,6 +196,7 @@ if __name__ == "__main__":
             {
                 "name": "Chicken Sandwich",
                 "quantity": 100,
+                "price": "50",
                 "category": "Snacks",
                 "is_approved": True,
                 "is_todays_special": False,
@@ -195,6 +204,7 @@ if __name__ == "__main__":
             {
                 "name": "Coke",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -202,6 +212,7 @@ if __name__ == "__main__":
             {
                 "name": "Pepsi",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -209,6 +220,7 @@ if __name__ == "__main__":
             {
                 "name": "Fanta",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -216,6 +228,7 @@ if __name__ == "__main__":
             {
                 "name": "Sprite",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -223,6 +236,7 @@ if __name__ == "__main__":
             {
                 "name": "Mango Shake",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -230,6 +244,7 @@ if __name__ == "__main__":
             {
                 "name": "Mango Juice",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": True,
                 "is_todays_special": False,
@@ -237,6 +252,7 @@ if __name__ == "__main__":
             {
                 "name": "Strawberry Shake",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -244,6 +260,7 @@ if __name__ == "__main__":
             {
                 "name": "Strawberry Juice",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -251,6 +268,7 @@ if __name__ == "__main__":
             {
                 "name": "Orange Shake",
                 "quantity": 100,
+                "price": "50",
                 "category": "Drinks",
                 "is_approved": False,
                 "is_todays_special": False,
@@ -262,6 +280,7 @@ if __name__ == "__main__":
                 Food(
                     name=food["name"],
                     quantity=food["quantity"],
+                    price=food["price"],
                     category=FoodCategory.objects.get(name=food["category"]),
                     created_by=admin_user,
                     modified_by=admin_user,

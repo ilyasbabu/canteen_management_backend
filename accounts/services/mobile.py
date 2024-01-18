@@ -20,7 +20,7 @@ def user_login(username: str, password: str):
 
     res["auth_token"] = auth_token
     res["username"] = user.username
-    res["name"] = user.get_full_name()
+    res["name"] = user.name
     res["type"] = user.type
     return res
 
