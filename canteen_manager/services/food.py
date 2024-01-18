@@ -1,6 +1,7 @@
 from canteen_manager.models import Food, FoodCategory
 from accounts.models import UserType
 from django.core.exceptions import ValidationError
+from django.db.models import F
 from common.constants import NOT_CANTEEN_MANAGER_MSG
 
 
@@ -30,7 +31,7 @@ def create_food(user, name, quantity, price, category_id):
     if user.type != UserType.MANAGER:
         raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
     try:
-        category = FoodCategory.objects.get(id=category_id)
+        category = FoodCategory.objects.get(id=category_id, is_active=True)
     except:
         raise ValidationError("Invalid Food Category")
     food = Food(
@@ -43,3 +44,60 @@ def create_food(user, name, quantity, price, category_id):
     )
     food.save()
     return food
+
+
+def get_food_detail(user, food_id):
+    if user.type != UserType.MANAGER:
+        raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
+    try:
+        return (
+            Food.objects.annotate(
+                category_name=F("category__name"),
+                approved_by_name=F("approved_by__user__name"),
+            )
+            .values(
+                "id",
+                "name",
+                "price",
+                "quantity",
+                "is_approved",
+                "is_todays_special",
+                "category_name",
+                "category_id",
+                "approved_by_id",
+                "approved_by_name",
+            )
+            .get(id=food_id, is_active=True)
+        )
+    except:
+        raise ValidationError("Invalid Food")
+
+
+def update_food(user, food_id, name, quantity, price, category_id):
+    if user.type != UserType.MANAGER:
+        raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
+    try:
+        food = Food.objects.get(id=food_id, is_active=True)
+    except:
+        raise ValidationError("Invalid Food")
+    try:
+        category = FoodCategory.objects.get(id=category_id, is_active=True)
+    except:
+        raise ValidationError("Invalid Food Category")
+    food.name = name
+    food.price = price
+    food.quantity = quantity
+    food.category = category
+    food.modified_by = user
+    food.save()
+
+
+def delete_food(user, food_id):
+    if user.type != UserType.MANAGER:
+        raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
+    try:
+        food = Food.objects.get(id=food_id, is_active=True)
+    except:
+        raise ValidationError("Invalid Food")
+    food.is_active = False
+    food.save()

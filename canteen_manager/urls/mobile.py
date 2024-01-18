@@ -6,7 +6,7 @@ urlpatterns = [
     path("food/list/", mobile.FoodListAPI.as_view()),
     path("food/category/dropdown/", mobile.FoodCategoryDropdownAPI.as_view()),
     path("food/create/", mobile.FoodCreateAPI.as_view()),
-    path("food/detail/", mobile.FoodListAPI.as_view()),
-    path("food/update/", mobile.FoodListAPI.as_view()),
-    path("food/delete/", mobile.FoodListAPI.as_view()),
+    path("food/detail/<int:id>/", mobile.FoodDetailAPI.as_view()),
+    path("food/update/<int:id>/", mobile.FoodUpdateAPI.as_view()),
+    path("food/delete/<int:id>/", mobile.FoodDeleteAPI.as_view()),
 ]

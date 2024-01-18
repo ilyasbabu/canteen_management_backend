@@ -6,8 +6,11 @@
 2. [Logout](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#2-logout)
 3. [Change Password](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#3-change-password)
 4. [Food List for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-list-for-canteen-manager)
-5. [Food Category Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-category-dropdown)
-6. [Food Create](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#4-food-create)
+5. [Food Category Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#5-food-category-dropdown)
+6. [Food Create](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#6-food-create)
+7. [Food Details for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#7-food-details-for-canteen-manager)
+8. [Food Update for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#8-food-update-for-canteen-manager)
+9. [Food Delete for Canteen Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#9-food-delete-for-canteen-manager)
 
 ### Authentication
 ```
@@ -267,6 +270,105 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "Invalid Food Category"
+  ]
+}
+```
+
+---
+
+## 7. Food Details For Canteen Manager
+
+**GET** - `api/mobile/canteen/food/detail/[food_id]/`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": {
+    "id": 1,
+    "name": "Paneer Tikka",
+    "price": "50",
+    "quantity": 100,
+    "is_approved": true,
+    "is_todays_special": true,
+    "category_id": 1,
+    "approved_by_id": 1,
+    "category_name": "Vegetarian",
+    "approved_by_name": "Teacher 1"
+  }
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Invalid Food"
+  ]
+}
+```
+
+---
+
+## 8. Food Update For Canteen Manager
+
+**POST** - `api/mobile/canteen/food/update/[food_id]/`
+
+(authentication Required)
+```
+*name
+*quantity
+*price
+*category_id
+```
+Sample Success Response - 
+```
+{
+  "result": true,
+  "msg": "Food Updated Successfully",
+  "data": {}
+}
+```
+Sample Error Response - 
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Invalid Food"
+  ]
+}
+```
+
+---
+
+## 9. Food Delete For Canteen Manager
+
+**POST** - `api/mobile/canteen/food/delete/[food_id]/`
+
+(authentication Required)
+
+Sample Success Response - 
+```
+{
+  "result": true,
+  "msg": "Food Deleted Successfully",
+  "data": {}
+}
+```
+Sample Error Response - 
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Invalid Food"
   ]
 }
 ```
