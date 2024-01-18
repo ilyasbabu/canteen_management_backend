@@ -507,6 +507,7 @@ Sample Error Response -
 }
 ```
 ---
+
 ## 13. Food Mark as Todays Special
 
 **POST** - `api/mobile/canteen/food/mark-as-todays-special/[food_id]/`
