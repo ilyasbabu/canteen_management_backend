@@ -42,8 +42,12 @@ def create_teacher(request):
         user=teacher_user, created_by=request.user, modified_by=request.user
     )
 
+
 def delete_teacher(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
     teacher.is_active = False
     teacher.modified_by = request.user
     teacher.save()
+    teacher_user = teacher.user
+    teacher_user.is_disabled = True
+    teacher_user.save()
