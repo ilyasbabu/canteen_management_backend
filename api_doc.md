@@ -81,7 +81,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/logout/`
 
-(authentication Required)
+authentication Required (Manager, Student, Teacher)
 
 Sample Success Response - 
 
@@ -106,7 +106,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/change-password/`
 
-(authentication Required)
+authentication Required (Manager, Student, Teacher)
 ```
 *new_password
 *confirm_password
@@ -139,7 +139,7 @@ Sample Error Response -
 
 **GET** - `api/mobile/canteen/food/list/`
 
-(authentication Required)
+authentication Required (Manager)
 
 Sample Success Response - 
 
@@ -213,7 +213,7 @@ Sample Error Response -
 
 **GET** - `api/mobile/canteen/food/category/dropdown/`
 
-(authentication Required)
+authentication Required (Manager, Student, Teacher)
 
 Sample Success Response - 
 ```
@@ -251,7 +251,7 @@ Sample Success Response -
 
 **POST** - `api/mobile/canteen/food/create/`
 
-(authentication Required)
+authentication Required (Manager)
 ```
 *name
 *quantity
@@ -285,7 +285,7 @@ Sample Error Response -
 
 **GET** - `api/mobile/canteen/food/detail/[food_id]/`
 
-(authentication Required)
+authentication Required (Manager)
 
 Sample Success Response - 
 
@@ -325,7 +325,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/canteen/food/update/[food_id]/`
 
-(authentication Required)
+authentication Required (Manager)
 ```
 *name
 *quantity
@@ -357,7 +357,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/canteen/food/delete/[food_id]/`
 
-(authentication Required)
+authentication Required (Manager)
 
 Sample Success Response - 
 ```
@@ -384,7 +384,7 @@ Sample Error Response -
 
 **GET** - `api/mobile/teacher/food/list/`
 
-(authentication Required)
+authentication Required (Teacher)
 
 Sample Success Response - 
 
@@ -448,7 +448,7 @@ Sample Error Response -
 
 **GET** - `api/mobile/teacher/food/detail/[food_id]`
 
-(authentication Required)
+authentication Required (Teacher)
 
 Sample Success Response - 
 
@@ -484,7 +484,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/teacher/food/approve/[food_id]`
 
-(authentication Required)
+authentication Required (Teacher)
 
 Sample Success Response - 
 
@@ -511,7 +511,7 @@ Sample Error Response -
 
 **POST** - `api/mobile/canteen/food/mark-as-todays-special/[food_id]/`
 
-(authentication Required)
+authentication Required (Manager)
 
 Sample Success Response - 
 
