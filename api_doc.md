@@ -15,6 +15,8 @@
 11. [Food Detail for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-detail-for-teacher)
 12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#12-food-approve)
 13. [Food Mark as todays Special](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#13-food-mark-as-todays-special)
+14. [Food List for Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#14-food-list-for-student)
+
 
 ### Authentication
 ```
@@ -534,5 +536,46 @@ Sample Error Response -
   ]
 }
 ```
+---
+
+
+## 14. Food List for Student
+
+**POST** - `api/mobile/student/food/list/`
+
+authentication Required (Student)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 15,
+      "name": "Mango Juice",
+      "price": "50",
+      "quantity": 100,
+      "is_todays_special": false
+    },
+    {
+      "id": 9,
+      "name": "Chicken Sandwich",
+      "price": "50",
+      "quantity": 100,
+      "is_todays_special": false
+    },
+    {
+      "id": 8,
+      "name": "Chicken Roll",
+      "price": "50",
+      "quantity": 100,
+      "is_todays_special": false
+    }
+  ]
+}
+```
+
 ---
 

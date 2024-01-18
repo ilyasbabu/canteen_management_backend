@@ -3,7 +3,7 @@ from teacher.models import Teacher
 from accounts.models import UserType
 from django.core.exceptions import ValidationError
 from django.db.models import F
-from common.constants import NOT_CANTEEN_MANAGER_MSG, NOT_TEACHER_MSG
+from common.constants import NOT_CANTEEN_MANAGER_MSG, NOT_TEACHER_MSG, NOT_STUDENT_MSG
 
 
 def get_food_list_for_manager(user):
@@ -172,3 +172,19 @@ def mark_as_todays_special(user, food_id):
     Food.objects.exclude(id=food_id).update(is_todays_special=False, modified_by=user)
     food.is_todays_special = True
     food.save()
+
+
+def get_food_list_for_student(user):
+    if user.type != UserType.STUDENT:
+        raise ValidationError(NOT_STUDENT_MSG)
+    data = []
+    foods = Food.objects.filter(is_active=True, is_approved=True).order_by("-created_date")
+    for food in foods:
+        food_dct = {}
+        food_dct["id"] = food.id
+        food_dct["name"] = food.name
+        food_dct["price"] = food.price
+        food_dct["quantity"] = food.quantity
+        food_dct["is_todays_special"] = food.is_todays_special
+        data.append(food_dct)
+    return data
