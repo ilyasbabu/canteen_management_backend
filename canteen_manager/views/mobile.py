@@ -14,6 +14,7 @@ from canteen_manager.services.food import (
     get_food_detail_for_manager,
     update_food,
     delete_food,
+    mark_as_todays_special,
 )
 from canteen_manager.serializers.food import FoodCreateSerializer
 
@@ -148,3 +149,23 @@ class FoodDeleteAPI(ExceptionHandlerMixin, APIView):
             msg = handle_error(e)
             res = serialize_mobile_api(False, msg, "ERROR")
             return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+
+
+class FoodMarkTodaysSpecialAPI(ExceptionHandlerMixin, APIView):
+    """API for food delete"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, id):
+        try:
+            user = request.user
+            mark_as_todays_special(user, id)
+            res = serialize_mobile_api(True, msg="Food Marked as Todays Special 🎉")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+

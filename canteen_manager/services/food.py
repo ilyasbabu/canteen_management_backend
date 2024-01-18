@@ -156,3 +156,19 @@ def approve_food(user, food_id):
     food.is_approved = True
     food.approved_by = teacher
     food.save()
+
+
+def mark_as_todays_special(user, food_id):
+    if user.type != UserType.MANAGER:
+        raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
+    try:
+        food = Food.objects.get(id=food_id, is_active=True)
+    except:
+        raise ValidationError("Invalid Food")
+    if food.is_todays_special:
+        raise ValidationError("Food already marked as todays special")
+    if not food.is_approved:
+        raise ValidationError("Food not Approved by supervising teacher")
+    Food.objects.exclude(id=food_id).update(is_todays_special=False, modified_by=user)
+    food.is_todays_special = True
+    food.save()

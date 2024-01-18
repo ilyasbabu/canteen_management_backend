@@ -69,7 +69,7 @@
                                         {% endif %}
                                     </td>
                                     <td class="px-3 py-2 text-left">
-                                        {% if x.is_todays_special %}Yes{% else %}No{% endif %}
+                                        {% if x.is_approved %}Yes{% else %}No{% endif %}
                                     </td>
                                     <td class="px-3 py-2 text-left">{{x.approved_by.user.name}}</td>
                                     <td class="px-3 py-2 text-left">{{x.created_date}}</td>

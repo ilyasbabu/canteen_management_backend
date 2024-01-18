@@ -14,6 +14,7 @@
 10. [Food List for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#10-food-list-for-teacher)
 11. [Food Detail for Teacher](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#11-food-detail-for-teacher)
 12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#12-food-approve)
+13. [Food Mark as todays Special](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#13-food-mark-as-todays-special)
 
 ### Authentication
 ```
@@ -502,6 +503,33 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "Food already approved"
+  ]
+}
+```
+---
+## 13. Food Mark as Todays Special
+
+**POST** - `api/mobile/canteen/food/mark-as-todays-special/[food_id]/`
+
+(authentication Required)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Food Marked as Todays Special 🎉",
+  "data": {}
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Food already marked as todays special"
   ]
 }
 ```
