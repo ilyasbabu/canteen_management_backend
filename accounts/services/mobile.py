@@ -66,3 +66,12 @@ def login_info_save(user, auth_token):
 
 def user_logout(user) -> None:
     UserAuthToken.objects.filter(user=user).update(is_expired=True)
+
+
+def create_user(username: str, password: str, name: str, mobile: str, type: UserType):
+    user = User(username=username, name=name, mobile=mobile, type=type)
+    validate_password(password)
+    user.set_password(password)
+    user.full_clean()
+    user.save()
+    return user

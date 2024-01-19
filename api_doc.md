@@ -16,6 +16,8 @@
 12. [Food Approve](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#12-food-approve)
 13. [Food Mark as todays Special](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#13-food-mark-as-todays-special)
 14. [Food List for Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#14-food-list-for-student)
+15. [Department Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#15-department-dropdown)
+16. [Student Register](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#16-student-register)
 
 
 ### Authentication
@@ -579,3 +581,71 @@ Sample Success Response -
 
 ---
 
+
+## 15. Department Dropdown
+
+**GET** - `api/mobile/student/department/dropdown/`
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "value": "COMPUTER_SCIENCE",
+      "text": "Computer Science"
+    },
+    {
+      "value": "COMMERCE",
+      "text": "Commerce"
+    },
+    {
+      "value": "HOTEL_MANAGEMENT",
+      "text": "Hotel Management"
+    },
+    {
+      "value": "ENGLISH",
+      "text": "English"
+    },
+    {
+      "value": "ECONOMICS",
+      "text": "Economics"
+    }
+  ]
+}
+```
+---
+
+## 16. Student Register
+
+**POST** - `api/mobile/student/register/`
+```
+*mobile
+*name
+*password
+*confirm_password
+*department
+```
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Registered Successfully!",
+  "data": null
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Password and Confirm Password must be same"
+  ]
+}
+```
+---
