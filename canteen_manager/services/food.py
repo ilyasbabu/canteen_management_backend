@@ -186,5 +186,6 @@ def get_food_list_for_student(user):
         food_dct["price"] = food.price
         food_dct["quantity"] = food.quantity
         food_dct["is_todays_special"] = food.is_todays_special
+        food_dct["category"] = food.category.name
         data.append(food_dct)
     return data
