@@ -63,3 +63,25 @@ def place_order(user, products, delivery_time):
         order.delivery_time = datetime.strptime(delivery_time, date_format)
         order.full_clean()
         order.save()
+
+
+def get_order_list_for_student(user):
+    if user.type != UserType.STUDENT:
+        raise ValidationError(NOT_STUDENT_MSG)
+
+    student = Student.objects.get(user=user)
+    orders = Order.objects.filter(student=student)
+    return orders
+
+
+def get_order_detail_for_student(user, order_id):
+    if user.type != UserType.STUDENT:
+        raise ValidationError(NOT_STUDENT_MSG)
+    order_not_found = "Order not found"
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        raise ValidationError(order_not_found)
+    if order.student.user != user:
+        raise ValidationError(order_not_found)
+    return order

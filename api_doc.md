@@ -19,6 +19,8 @@
 15. [Department Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#15-department-dropdown)
 16. [Student Register](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#16-student-register)
 17. [Place Order](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#17-place-order)
+18. [Order List For Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#18-order-list-for-student)
+19. [Order Detail For Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#19-order-detail-for-student)
 
 
 ### Authentication
@@ -654,6 +656,9 @@ Sample Error Response -
 ## 17. Place Order
 
 **POST** - `api/mobile/student/order/`
+
+authentication Required (Student)
+
 ```
 *products (list of dictionaries, ex - [{"id":1,"quantity":2},{"id":5,"quantity":1}])
 *delivery_time (ex - "Jan 31 2023 18:50:00")
@@ -676,6 +681,89 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "No enough Quantity for Paneer Tikka"
+  ]
+}
+```
+---
+
+
+## 18. Order List for student
+
+**GET** - `api/mobile/student/order/list/`
+
+authentication Required (Student)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 1,
+      "order_id": "ORDER20240131001",
+      "total_price": 350.0,
+      "status": "Order Placed"
+    },
+    {
+      "id": 2,
+      "order_id": "ORDER20240131002",
+      "total_price": 150.0,
+      "status": "Order Placed"
+    }
+  ]
+}
+```
+
+---
+
+## 19. Order Detail for Student
+
+**GET** - `api/mobile/student/order/detail/[order_id]`
+
+authentication Required (Student)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": {
+    "order_id": "ORDER20240131001",
+    "total_price": 350.0,
+    "total_quantity": 7,
+    "delivery_time": "31-01-2023 18:50:00",
+    "status": "Order Placed",
+    "remarks": null,
+    "items": [
+      {
+        "id": 1,
+        "food_id": "1",
+        "food_name": "Paneer Tikka",
+        "quantity": 1,
+        "price": 50.0
+      },
+      {
+        "id": 2,
+        "food_id": "4",
+        "food_name": "Chicken Biryani",
+        "quantity": 6,
+        "price": 300.0
+      }
+    ]
+  }
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Order not found"
   ]
 }
 ```
