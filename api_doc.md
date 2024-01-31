@@ -18,6 +18,7 @@
 14. [Food List for Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#14-food-list-for-student)
 15. [Department Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#15-department-dropdown)
 16. [Student Register](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#16-student-register)
+17. [Place Order](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#17-place-order)
 
 
 ### Authentication
@@ -645,6 +646,36 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "Password and Confirm Password must be same"
+  ]
+}
+```
+---
+
+## 17. Place Order
+
+**POST** - `api/mobile/student/order/`
+```
+*products (list of dictionaries, ex - [{"id":1,"quantity":2},{"id":5,"quantity":1}])
+*delivery_time (ex - "Jan 31 2023 18:50:00")
+
+```
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Order Placed Succesfully",
+  "data": null
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "No enough Quantity for Paneer Tikka"
   ]
 }
 ```

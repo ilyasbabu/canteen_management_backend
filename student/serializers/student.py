@@ -7,3 +7,8 @@ class StudentCreateSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=100)
     confirm_password = serializers.CharField(max_length=100)
     department = serializers.CharField(max_length=100)
+
+
+class OrderPlaceSerializer(serializers.Serializer):
+    products = serializers.JSONField()
+    delivery_time = serializers.CharField()
