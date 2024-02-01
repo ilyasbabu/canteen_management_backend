@@ -16,7 +16,18 @@ from canteen_manager.services.food import (
     delete_food,
     mark_as_todays_special,
 )
-from canteen_manager.serializers.food import FoodCreateSerializer
+from canteen_manager.serializers.food import (
+    FoodCreateSerializer,
+    OrderStatusUpdateSerializer,
+    OrderListSerializer,
+    OrderDetailSerializer,
+)
+from student.services.order import (
+    get_order_status_dropdown_for_manager,
+    change_order_status,
+    get_order_list_for_manager,
+    get_order_detail_for_manager,
+)
 
 
 class FoodListAPI(ExceptionHandlerMixin, APIView):
@@ -169,3 +180,89 @@ class FoodMarkTodaysSpecialAPI(ExceptionHandlerMixin, APIView):
             res = serialize_mobile_api(False, msg, "ERROR")
             return Response(status=status.HTTP_404_NOT_FOUND, data=res)
 
+
+class OrderListAPI(ExceptionHandlerMixin, APIView):
+    """API for order list"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        try:
+            user = request.user
+            data = get_order_list_for_manager(user)
+            serializer = OrderListSerializer(data, many=True)
+            res = serialize_mobile_api(True, serializer.data, "SUCCESS")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+
+
+class OrderDetailAPI(ExceptionHandlerMixin, APIView):
+    """API for order detail"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id):
+        try:
+            user = request.user
+            data = get_order_detail_for_manager(user, id)
+            serializer = OrderDetailSerializer(data)
+            res = serialize_mobile_api(True, serializer.data, "SUCCESS")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+
+
+class OrderStatusDropdownAPI(ExceptionHandlerMixin, APIView):
+    """API for order status dropdown"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        try:
+            user = request.user
+            data = get_order_status_dropdown_for_manager(user)
+            res = serialize_mobile_api(True, data, "SUCCESS")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)
+
+
+class OrderStatusChangeAPI(ExceptionHandlerMixin, APIView):
+    """API for order status change"""
+
+    authentication_classes = [CustomTokenAuthentication]
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, id):
+        try:
+            user = request.user
+            serializer = OrderStatusUpdateSerializer(data=request.data)
+            serializer.is_valid()
+            if serializer.errors:
+                error_list = [
+                    f"{error.upper()}: {serializer.errors[error][0]}"
+                    for error in serializer.errors
+                ]
+                print(error_list)
+                raise ValidationError(error_list)
+            change_order_status(user, id, **serializer.validated_data)
+            res = serialize_mobile_api(True, msg="Order Status Changed 🎉")
+            return Response(status=status.HTTP_200_OK, data=res)
+        except Exception as e:
+            msg = handle_error(e)
+            res = serialize_mobile_api(False, msg, "ERROR")
+            return Response(status=status.HTTP_404_NOT_FOUND, data=res)

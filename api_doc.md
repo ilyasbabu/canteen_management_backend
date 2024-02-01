@@ -21,6 +21,10 @@
 17. [Place Order](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#17-place-order)
 18. [Order List For Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#18-order-list-for-student)
 19. [Order Detail For Student](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#19-order-detail-for-student)
+20. [Order Status Dropdown](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#20-order-status-dropdown)
+21. [Order Status Change](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#21-order-status-change)
+22. [Order List for Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#22-order-list-for-manger)
+23. [Order Detail for Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#23-order-detail-for-manger)
 
 
 ### Authentication
@@ -662,7 +666,6 @@ authentication Required (Student)
 ```
 *products (list of dictionaries, ex - [{"id":1,"quantity":2},{"id":5,"quantity":1}])
 *delivery_time (ex - "Jan 31 2023 18:50:00")
-
 ```
 Sample Success Response - 
 
@@ -764,6 +767,185 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "Order not found"
+  ]
+}
+```
+---
+
+## 20. Order Status Dropdown
+
+**GET** - `api/mobile/canteen/order/status/dropdown/`
+
+authentication Required (Manager)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "value": "PLACED",
+      "text": "Order Placed"
+    },
+    {
+      "value": "APPROVED",
+      "text": "Order Approved"
+    },
+    {
+      "value": "REJECTED",
+      "text": "Order Rejected"
+    },
+    {
+      "value": "READY",
+      "text": "Order Ready To be Delivered"
+    },
+    {
+      "value": "DELIVERED",
+      "text": "Order Delivered"
+    }
+  ]
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a CANTEEN MANAGER to access this API"
+  ]
+}
+```
+
+---
+
+## 21. Order Status Change
+
+**POST** - `api/mobile/canteen/order/status/change/[order_id]/`
+
+authentication Required (Manager)
+
+```
+*status (from dropdown)
+*remarks
+
+```
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "Order Status Changed 🎉",
+  "data": {}
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Invalid Status"
+  ]
+}
+```
+---
+
+## 22. Order List for manager
+
+**GET** - `api/mobile/canteen/order/list/`
+
+authentication Required (Manager)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 1,
+      "order_id": "ORDER20240131001",
+      "total_price": 350.0,
+      "status": "Order Ready To be Delivered",
+      "student": "Jhon"
+    },
+    {
+      "id": 2,
+      "order_id": "ORDER20240131002",
+      "total_price": 350.0,
+      "status": "Order Placed",
+      "student": "Jhon"
+    }
+  ]
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a CANTEEN MANAGER to access this API"
+  ]
+}
+```
+---
+
+## 23. Order Detail for manger
+
+**POST** - `api/mobile/canteen/order/detail/[order_id]/`
+
+authentication Required (Manager)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": {
+    "order_id": "ORDER20240131001",
+    "total_price": 350.0,
+    "total_quantity": 7,
+    "delivery_time": "31-01-2023 18:50:00",
+    "status": "Order Ready To be Delivered",
+    "remarks": "as",
+    "student": "Jhon",
+    "items": [
+      {
+        "id": 1,
+        "food_id": "1",
+        "food_name": "Paneer Tikka",
+        "quantity": 1,
+        "price": 50.0
+      },
+      {
+        "id": 2,
+        "food_id": "4",
+        "food_name": "Chicken Biryani",
+        "quantity": 6,
+        "price": 300.0
+      }
+    ]
+  }
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a CANTEEN MANAGER to access this API"
   ]
 }
 ```

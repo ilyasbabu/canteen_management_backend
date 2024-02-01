@@ -1,3 +1,3 @@
 from .student import Student, Department
-from .order import Order
+from .order import Order, Status
 from .orderitem import OrderItem
