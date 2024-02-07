@@ -34,9 +34,13 @@ class OrderItemSerializer(serializers.Serializer):
     food_name = serializers.SerializerMethodField()
     quantity = serializers.IntegerField()
     price = serializers.FloatField()
+    image_url = serializers.SerializerMethodField()
 
     def get_food_name(self, obj):
         return obj.food.name
+
+    def get_image_url(self, obj):
+        return obj.food.image_url if obj.food.image_url else None
 
 
 class OrderDetailSerializer(serializers.Serializer):
