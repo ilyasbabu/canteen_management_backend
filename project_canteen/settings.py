@@ -107,6 +107,6 @@ LOGIN_URL = "accounts:login"
 
 cloudinary.config( 
     cloud_name = "do6mh6z0s", 
-    api_key = "877465161674342", 
-    api_secret = "H9QA6h0rVjPjVmyLX1pyAdKOKJo" 
+    api_key = os.getenv('CLOUDINARY_KEY'), 
+    api_secret = os.getenv('CLOUDINARY_SECRET') 
 )
