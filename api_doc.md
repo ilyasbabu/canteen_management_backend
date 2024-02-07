@@ -268,6 +268,7 @@ authentication Required (Manager)
 *quantity
 *price
 *category_id
+image
 ```
 Sample Success Response - 
 
@@ -313,6 +314,7 @@ Sample Success Response -
     "is_todays_special": true,
     "category_id": 1,
     "approved_by_id": 1,
+    "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
     "category_name": "Vegetarian",
     "approved_by_name": "Teacher 1"
   }
@@ -342,6 +344,7 @@ authentication Required (Manager)
 *quantity
 *price
 *category_id
+image
 ```
 Sample Success Response - 
 ```
@@ -409,6 +412,7 @@ Sample Success Response -
       "name": "Chicken 65",
       "price": "50",
       "quantity": 100,
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_approved": false
     },
     {
@@ -416,6 +420,7 @@ Sample Success Response -
       "name": "Chicken Biryani",
       "price": "50",
       "quantity": 100,
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_approved": true
     },
     {
@@ -423,6 +428,7 @@ Sample Success Response -
       "name": "Chicken Tikka",
       "price": "50",
       "quantity": 100,
+      "image_url": null,
       "is_approved": false
     },
     {
@@ -430,6 +436,7 @@ Sample Success Response -
       "name": "Masala Dosa",
       "price": "50",
       "quantity": 100,
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_approved": false
     },
     {
@@ -437,6 +444,7 @@ Sample Success Response -
       "name": "Paneer Tikka",
       "price": "50",
       "quantity": 100,
+      "image_url": null,
       "is_approved": true
     }
   ]
@@ -474,7 +482,8 @@ Sample Success Response -
     "quantity": 100,
     "is_approved": false,
     "category_id": 1,
-    "category_name": "Vegetarian"
+    "category_name": "Vegetarian",
+    "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg"
   }
 }
 ```
@@ -566,6 +575,8 @@ Sample Success Response -
       "name": "Mango Juice",
       "price": "50",
       "quantity": 100,
+      "category": "Drinks",
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_todays_special": false
     },
     {
@@ -573,6 +584,8 @@ Sample Success Response -
       "name": "Chicken Sandwich",
       "price": "50",
       "quantity": 100,
+      "category": "Snacks",
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_todays_special": false
     },
     {
@@ -580,6 +593,8 @@ Sample Success Response -
       "name": "Chicken Roll",
       "price": "50",
       "quantity": 100,
+      "category": "Drinks",
+      "image_url": "https://res.cloudinary.com/do6mh6z0s/image/upload/v1707292467/canteen_management/t5jrdentco4iztmlf67t.jpg",
       "is_todays_special": false
     }
   ]
@@ -746,14 +761,16 @@ Sample Success Response -
         "food_id": "1",
         "food_name": "Paneer Tikka",
         "quantity": 1,
-        "price": 50.0
+        "price": 50.0,
+        "image_url": null
       },
       {
         "id": 2,
         "food_id": "4",
         "food_name": "Chicken Biryani",
         "quantity": 6,
-        "price": 300.0
+        "price": 300.0,
+        "image_url": null
       }
     ]
   }
@@ -925,14 +942,16 @@ Sample Success Response -
         "food_id": "1",
         "food_name": "Paneer Tikka",
         "quantity": 1,
-        "price": 50.0
+        "price": 50.0,
+        "image_url": null
       },
       {
         "id": 2,
         "food_id": "4",
         "food_name": "Chicken Biryani",
         "quantity": 6,
-        "price": 300.0
+        "price": 300.0,
+        "image_url": null
       }
     ]
   }
