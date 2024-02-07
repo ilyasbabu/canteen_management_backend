@@ -1,5 +1,6 @@
 import sys
 import traceback
+import cloudinary.uploader
 
 from django.core.exceptions import ValidationError
 from ..constants import ERROR_MSG
@@ -21,3 +22,8 @@ def handle_error(e):
         error_info = "\n".join(e.messages)
         msg = e.messages
     return msg
+
+
+def upload_image(image):
+    result = cloudinary.uploader.upload(image, folder="/canteen_management")
+    return result["secure_url"]

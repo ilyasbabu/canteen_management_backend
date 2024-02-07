@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,3 +103,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "accounts:login"
+
+
+cloudinary.config( 
+    cloud_name = "do6mh6z0s", 
+    api_key = "877465161674342", 
+    api_secret = "H9QA6h0rVjPjVmyLX1pyAdKOKJo" 
+)

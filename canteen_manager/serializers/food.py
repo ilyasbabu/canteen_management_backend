@@ -6,6 +6,7 @@ class FoodCreateSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
     price = serializers.IntegerField()
     category_id = serializers.CharField(max_length=100)
+    image = serializers.ImageField(required=False)
 
 
 class OrderStatusUpdateSerializer(serializers.Serializer):

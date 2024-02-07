@@ -14,6 +14,7 @@ class Food(TimeStamp):
     is_approved = models.BooleanField(default=False)
     approved_by = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     is_todays_special = models.BooleanField(default=False)
+    image_url = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

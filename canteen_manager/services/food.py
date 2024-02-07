@@ -4,6 +4,7 @@ from accounts.models import UserType
 from django.core.exceptions import ValidationError
 from django.db.models import F
 from common.constants import NOT_CANTEEN_MANAGER_MSG, NOT_TEACHER_MSG, NOT_STUDENT_MSG
+from common.services import upload_image
 
 
 def get_food_list_for_manager(user):
@@ -28,18 +29,20 @@ def get_food_category(user):
     return FoodCategory.objects.filter(is_active=True).values("id", "name")
 
 
-def create_food(user, name, quantity, price, category_id):
+def create_food(user, name, quantity, price, category_id, image=None):
     if user.type != UserType.MANAGER:
         raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
     try:
         category = FoodCategory.objects.get(id=category_id, is_active=True)
     except:
         raise ValidationError("Invalid Food Category")
+    image_url = upload_image(image) if image else None
     food = Food(
         name=name,
         price=price,
         quantity=quantity,
         category=category,
+        image_url=image_url,
         created_by=user,
         modified_by=user,
     )
@@ -65,6 +68,7 @@ def get_food_detail_for_manager(user, food_id):
                 "is_todays_special",
                 "category_name",
                 "category_id",
+                "image_url",
                 "approved_by_id",
                 "approved_by_name",
             )
@@ -74,7 +78,7 @@ def get_food_detail_for_manager(user, food_id):
         raise ValidationError("Invalid Food")
 
 
-def update_food(user, food_id, name, quantity, price, category_id):
+def update_food(user, food_id, name, quantity, price, category_id, image=None):
     if user.type != UserType.MANAGER:
         raise ValidationError(NOT_CANTEEN_MANAGER_MSG)
     try:
@@ -90,6 +94,8 @@ def update_food(user, food_id, name, quantity, price, category_id):
     food.quantity = quantity
     food.category = category
     food.modified_by = user
+    if image:
+        food.image_url = upload_image(image)
     food.save()
 
 
@@ -115,6 +121,7 @@ def get_food_list_for_teacher(user):
         food_dct["name"] = food.name
         food_dct["price"] = food.price
         food_dct["quantity"] = food.quantity
+        food_dct["image_url"] = food.image_url
         food_dct["is_approved"] = food.is_approved
         data.append(food_dct)
     return data
@@ -136,6 +143,7 @@ def get_food_detail_for_teacher(user, food_id):
                 "is_approved",
                 "category_name",
                 "category_id",
+                "image_url",
             )
             .get(id=food_id, is_active=True)
         )
@@ -178,7 +186,9 @@ def get_food_list_for_student(user):
     if user.type != UserType.STUDENT:
         raise ValidationError(NOT_STUDENT_MSG)
     data = []
-    foods = Food.objects.filter(is_active=True, is_approved=True).order_by("-created_date")
+    foods = Food.objects.filter(is_active=True, is_approved=True).order_by(
+        "-created_date"
+    )
     for food in foods:
         food_dct = {}
         food_dct["id"] = food.id
@@ -187,5 +197,6 @@ def get_food_list_for_student(user):
         food_dct["quantity"] = food.quantity
         food_dct["is_todays_special"] = food.is_todays_special
         food_dct["category"] = food.category.name
+        food_dct["image_url"] = food.image_url
         data.append(food_dct)
     return data
