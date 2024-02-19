@@ -25,6 +25,9 @@
 21. [Order Status Change](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#21-order-status-change)
 22. [Order List for Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#22-order-list-for-manger)
 23. [Order Detail for Manager](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#23-order-detail-for-manger)
+24. [Order List for Delivery Agent](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#24-order-list-for-delivery-agent)
+25. [Order Status Picked for Delivery Agent](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#25-order-status-picked-for-delivery-agent)
+26. [Order Status Delivered for Delivery Agent](https://github.com/ilyasbabu/canteen_management_backend/blob/master/api_doc.md#26-order-status-delivered-for-delivery-agent)
 
 
 ### Authentication
@@ -918,7 +921,7 @@ Sample Error Response -
 
 ## 23. Order Detail for manger
 
-**POST** - `api/mobile/canteen/order/detail/[order_id]/`
+**GET** - `api/mobile/canteen/order/detail/[order_id]/`
 
 authentication Required (Manager)
 
@@ -965,6 +968,103 @@ Sample Error Response -
   "msg": "ERROR",
   "data": [
     "You Should be a CANTEEN MANAGER to access this API"
+  ]
+}
+```
+---
+
+## 24. Order List for Delivery Agent
+
+**GET** - `api/mobile/delivery/order/list/`
+
+authentication Required (Delivery Agent)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": [
+    {
+      "id": 1,
+      "order_id": "ORDER20240131001",
+      "total_price": 350.0
+      "status": "Order Ready To be Delivered",
+    },
+    {
+      "id": 2,
+      "order_id": "ORDER20240131002",
+      "total_price": 150.0,
+      "status": "Order Delivered",
+    }
+  ]
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "You Should be a DELIVERY AGENT to access this API"
+  ]
+}
+```
+---
+
+## 25. Order Status Picked for Delivery Agent
+
+**POST** - `api/mobile/delivery/order/status/picked/[order_id]/`
+
+authentication Required (Delivery Agent)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": null
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Something went wrong!"
+  ]
+}
+```
+---
+
+## 26. Order Status Delivered for Delivery Agent
+
+**POST** - `api/mobile/delivery/order/status/delivered/[order_id]/`
+
+authentication Required (Delivery Agent)
+
+Sample Success Response - 
+
+```
+{
+  "result": true,
+  "msg": "SUCCESS",
+  "data": null
+}
+```
+Sample Error Response - 
+
+```
+{
+  "result": false,
+  "msg": "ERROR",
+  "data": [
+    "Something went wrong!"
   ]
 }
 ```
