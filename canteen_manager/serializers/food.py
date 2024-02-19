@@ -11,7 +11,7 @@ class FoodCreateSerializer(serializers.Serializer):
 
 class OrderStatusUpdateSerializer(serializers.Serializer):
     status = serializers.CharField(max_length=100)
-    remarks = serializers.CharField(max_length=100)
+    remarks = serializers.CharField(max_length=100, required=False)
 
 
 class OrderListSerializer(serializers.Serializer):

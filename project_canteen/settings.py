@@ -27,6 +27,7 @@ LOCAL_APPS = [
     "canteen_manager.apps.CanteenManagerConfig",
     "teacher.apps.TeacherConfig",
     "student.apps.StudentConfig",
+    "delivery_agent.apps.DeliveryAgentConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS  + LOCAL_APPS

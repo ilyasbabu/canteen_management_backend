@@ -8,6 +8,7 @@ class UserType(models.TextChoices):
     MANAGER = "MANAGER", "Manager"
     TEACHER = "TEACHER", "Teacher"
     STUDENT = "STUDENT", "Student"
+    DELIVERY = "DELIVERY", "Delivery Agent"
 
 
 

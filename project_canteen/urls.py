@@ -7,4 +7,5 @@ urlpatterns = [
     path("", include("canteen_manager.urls", namespace="canteen_manager")),
     path("", include("teacher.urls", namespace="teacher")),
     path("", include("student.urls", namespace="student")),
+    path("", include("delivery_agent.urls", namespace="delivery_agent")),
 ]

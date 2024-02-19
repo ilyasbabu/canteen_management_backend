@@ -15,6 +15,7 @@ from accounts.models import UserType
 from canteen_manager.models import CanteenManager, FoodCategory, Food
 from teacher.models import Teacher
 from student.models import Student, Department
+from delivery_agent.models import DeliveryAgent
 
 User = get_user_model()
 
@@ -105,6 +106,32 @@ if __name__ == "__main__":
             print(
                 "Supervising Teacher- " + teacher["name"] + " Created Sucessfully!!!\n"
             )
+
+        d_name = "Delivery Boy 1"
+        d_username = "delivery_boy"
+        d_password = "1234"
+        d_mobile = "9999999999"
+        delivery_user = User(
+            username=d_username,
+            mobile=d_mobile,
+            name=d_name,
+            type=UserType.DELIVERY,
+        )
+        delivery_user.set_password(d_password)
+        delivery_user.full_clean()
+        delivery_user.save()
+        DeliveryAgent.objects.create(
+            user=delivery_user, created_by=admin_user, modified_by=admin_user
+        )
+        print(
+            "Delivery Agent credentials: \n username - "
+            + d_username
+            + "\n password - "
+            + d_password
+        )
+        print(
+            "Delivery Agent- " + d_name + " Created Sucessfully!!!\n"
+        )
 
         # FOOD
         food_categories = [
