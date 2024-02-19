@@ -1,11 +1,11 @@
 from django.test import TestCase
-from django.db import transaction
 from django.contrib.auth import get_user_model
 
 from accounts.models import UserType
 from canteen_manager.models import CanteenManager, FoodCategory, Food
 from teacher.models import Teacher
 from student.models import Student, Department
+from delivery_agent.models import DeliveryAgent
 
 User = get_user_model()
 
@@ -80,6 +80,30 @@ class InitializeScriptTestCase(TestCase):
             print(
                 "Supervising Teacher- " + teacher["name"] + " Created Sucessfully!!!\n"
             )
+
+        d_name = "Delivery Boy 1"
+        d_username = "delivery_boy"
+        d_password = "1234"
+        d_mobile = "9999999999"
+        delivery_user = User(
+            username=d_username,
+            mobile=d_mobile,
+            name=d_name,
+            type=UserType.DELIVERY,
+        )
+        delivery_user.set_password(d_password)
+        delivery_user.full_clean()
+        delivery_user.save()
+        DeliveryAgent.objects.create(
+            user=delivery_user, created_by=admin_user, modified_by=admin_user
+        )
+        print(
+            "Delivery Agent credentials: \n username - "
+            + d_username
+            + "\n password - "
+            + d_password
+        )
+        print("Delivery Agent- " + d_name + " Created Sucessfully!!!\n")
 
         # FOOD
         food_categories = [
@@ -307,14 +331,26 @@ class InitializeScriptTestCase(TestCase):
             print("Student- " + student["name"] + " Created Sucessfully!!!\n")
 
     def test_users_created(self):
-        admin_created = User.objects.filter(username="admin", type=UserType.ADMIN).exists()
+        admin_created = User.objects.filter(
+            username="admin", type=UserType.ADMIN
+        ).exists()
         self.assertTrue(admin_created)
 
-        canteen_manager_user = User.objects.filter(username="canteen_manager", type=UserType.MANAGER)
+        canteen_manager_user = User.objects.filter(
+            username="canteen_manager", type=UserType.MANAGER
+        )
         self.assertTrue(canteen_manager_user.exists())
 
-        canteen_manager_created = CanteenManager.objects.filter(user=canteen_manager_user[0]).exists()
+        canteen_manager_created = CanteenManager.objects.filter(
+            user=canteen_manager_user[0]
+        ).exists()
         self.assertTrue(canteen_manager_created)
+
+        delivery_agent_user = User.objects.filter(username="delivery_boy", type=UserType.DELIVERY)
+        self.assertTrue(delivery_agent_user.exists())
+
+        delivery_agent_created = DeliveryAgent.objects.filter(user=delivery_agent_user[0]).exists()
+        self.assertTrue(delivery_agent_created)
 
         teacher_user = User.objects.filter(username="teacher_1", type=UserType.TEACHER)
         self.assertTrue(teacher_user.exists())
