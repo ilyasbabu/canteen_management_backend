@@ -991,12 +991,18 @@ Sample Success Response -
       "order_id": "ORDER20240131001",
       "total_price": 350.0
       "status": "Order Ready To be Delivered",
+      "student_name": "Jhon",
+      "student_department": "Computer Science",
+      "student_mobile": "9898989898"
     },
     {
       "id": 2,
       "order_id": "ORDER20240131002",
       "total_price": 150.0,
       "status": "Order Delivered",
+      "student_name": "Jane",
+      "student_department": "Hotel Management",
+      "student_mobile": "9786677677"
     }
   ]
 }
